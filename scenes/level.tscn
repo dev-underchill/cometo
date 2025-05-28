@@ -1,0 +1,183 @@
+[gd_scene load_steps=16 format=3 uid="uid://dcls1oabe8w1h"]
+
+[ext_resource type="PackedScene" uid="uid://cs32y5seekr35" path="res://scenes/player.tscn" id="1_2q6dc"]
+[ext_resource type="Script" uid="uid://bhfr2q37ixqt1" path="res://scenes/level.gd" id="1_w7c3h"]
+[ext_resource type="PackedScene" uid="uid://dmnwp7i4r63c0" path="res://scenes/healthbar.tscn" id="3_w8frs"]
+[ext_resource type="Script" uid="uid://c3j7c4hy4b43y" path="res://scenes/button.gd" id="4_2r41h"]
+[ext_resource type="FontFile" uid="uid://4qff4droasqq" path="res://assets/fonts/upheavtt.ttf" id="4_mx8sn"]
+[ext_resource type="AudioStream" uid="uid://dohm81f5enlav" path="res://assets/music/game-over-groove-306764.mp3" id="5_ppgk2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_w8frs"]
+font = ExtResource("4_mx8sn")
+font_size = 60
+
+[sub_resource type="Theme" id="Theme_ppgk2"]
+default_font = ExtResource("4_mx8sn")
+
+[sub_resource type="LabelSettings" id="LabelSettings_2r41h"]
+font_size = 120
+
+[sub_resource type="LabelSettings" id="LabelSettings_klq6b"]
+font_size = 30
+
+[sub_resource type="Theme" id="Theme_klq6b"]
+default_font_size = 42
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b121j"]
+bg_color = Color(0.313726, 0.313726, 0.313726, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8c41q"]
+bg_color = Color(0.564706, 0.564706, 0.564706, 0.407843)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2r41h"]
+radius = 1000.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2r41h"]
+size = Vector2(1440, 810)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_w7c3h")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+offset_left = 985.0
+offset_top = -5.0
+offset_right = 1144.0
+offset_bottom = 49.0
+text = "0"
+label_settings = SubResource("LabelSettings_w8frs")
+horizontal_alignment = 2
+
+[node name="Healthbar" parent="CanvasLayer" instance=ExtResource("3_w8frs")]
+position = Vector2(25, 22)
+
+[node name="DeathUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ppgk2")
+
+[node name="Label" type="Label" parent="CanvasLayer/DeathUI"]
+layout_mode = 0
+offset_left = -294.0
+offset_top = -199.0
+offset_right = 336.0
+offset_bottom = -91.0
+text = "Game Over"
+label_settings = SubResource("LabelSettings_2r41h")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/DeathUI"]
+layout_mode = 0
+offset_left = -268.0
+offset_top = -125.0
+offset_right = 308.0
+offset_bottom = -17.0
+label_settings = SubResource("LabelSettings_klq6b")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/DeathUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.0
+offset_top = 97.0
+offset_right = 146.0
+offset_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_klq6b")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_b121j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8c41q")
+theme_override_styles/normal = SubResource("StyleBoxFlat_b121j")
+text = "RESTART"
+script = ExtResource("4_2r41h")
+
+[node name="Player" parent="." instance=ExtResource("1_2q6dc")]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+zoom = Vector2(0.8, 0.8)
+
+[node name="LiveZone" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LiveZone"]
+position = Vector2(576, 300)
+shape = SubResource("CircleShape2D_2r41h")
+one_way_collision_margin = 0.0
+
+[node name="PlayerLiveZone" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerLiveZone"]
+position = Vector2(576, 324)
+shape = SubResource("RectangleShape2D_2r41h")
+
+[node name="Audio" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Background" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("5_ppgk2")
+volume_db = -15.0
+autoplay = true
+
+[node name="Timers" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="PlayerRespawn" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="EnemyTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+autostart = true
+
+[node name="DeathUITimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[connection signal="pressed" from="CanvasLayer/DeathUI/Button" to="." method="_on_button_pressed"]
+[connection signal="laser_shot" from="Player" to="." method="_on_player_laser_shot"]
+[connection signal="lives_updated" from="Player" to="." method="_on_player_lives_updated"]
+[connection signal="body_exited" from="LiveZone" to="." method="_on_live_zone_body_exited"]
+[connection signal="body_exited" from="PlayerLiveZone" to="." method="_on_player_live_zone_body_exited"]
+[connection signal="timeout" from="Timers/PlayerRespawn" to="." method="_on_player_respawn_timeout"]
+[connection signal="timeout" from="Timers/EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="timeout" from="Timers/DeathUITimer" to="." method="_on_death_ui_timer_timeout"]

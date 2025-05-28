@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://t6etlvfaki8m"]
+
+[ext_resource type="PackedScene" uid="uid://bvstbv1lkmky5" path="res://scenes/comet.tscn" id="1_3a7n4"]
+[ext_resource type="Texture2D" uid="uid://b4pxypo3s7bqs" path="res://graphics/comet_large.png" id="1_3ka2k"]
+[ext_resource type="Script" uid="uid://b60i3sm68v65c" path="res://scenes/large_comet.gd" id="2_btp81"]
+
+[node name="LargeComet" instance=ExtResource("1_3a7n4")]
+mass = 0.4
+script = ExtResource("2_btp81")
+
+[node name="CollisionPolygon2D" parent="." index="0"]
+polygon = PackedVector2Array(-3, -28, -3, -27, -5, -27, -5, -26, -7, -26, -7, -25, -10, -25, -10, -24, -13, -24, -13, -23, -14, -23, -14, -22, -16, -22, -16, -21, -18, -21, -18, -20, -19, -20, -19, -19, -20, -19, -20, -18, -21, -18, -21, -17, -22, -17, -22, -15, -23, -15, -23, -14, -24, -14, -24, -12, -25, -12, -25, -11, -26, -11, -26, -9, -27, -9, -27, -3, -28, -3, -28, 7, -27, 7, -27, 11, -26, 11, -26, 13, -25, 13, -25, 15, -24, 15, -24, 17, -23, 17, -23, 21, -22, 21, -22, 23, -21, 23, -21, 24, -20, 24, -20, 25, -19, 25, -19, 26, -18, 26, -18, 27, -14, 27, -14, 28, 9, 28, 9, 27, 11, 27, 11, 26, 14, 26, 14, 25, 15, 25, 15, 24, 18, 24, 18, 23, 20, 23, 20, 22, 21, 22, 21, 21, 22, 21, 22, 12, 21, 12, 21, 9, 22, 9, 22, 7, 23, 7, 23, 6, 24, 6, 24, 5, 25, 5, 25, 4, 26, 4, 26, 2, 27, 2, 27, -2, 28, -2, 28, -18, 27, -18, 27, -21, 26, -21, 26, -23, 25, -23, 25, -24, 23, -24, 23, -25, 21, -25, 21, -26, 17, -26, 17, -27, 8, -27, 8, -28)
+
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("1_3ka2k")

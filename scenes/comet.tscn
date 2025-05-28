@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvstbv1lkmky5"]
+
+[ext_resource type="Script" uid="uid://jt4xwa7iivb0" path="res://scenes/comet.gd" id="1_2rx51"]
+[ext_resource type="Texture2D" uid="uid://67xw4fj1r4bm" path="res://graphics/particle.png" id="2_e3cmu"]
+[ext_resource type="AudioStream" uid="uid://b3v2x1idqpipw" path="res://assets/sfx/comet_explosion.mp3" id="3_67ubc"]
+
+[sub_resource type="Gradient" id="Gradient_e3cmu"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_67ubc"]
+gradient = SubResource("Gradient_e3cmu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_67ubc"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 98, 0)
+linear_accel_min = -400.0
+linear_accel_max = -200.0
+color_ramp = SubResource("GradientTexture1D_67ubc")
+
+[node name="Comet" type="RigidBody2D" groups=["Comet"]]
+collision_mask = 3
+mass = 0.1
+gravity_scale = 0.0
+script = ExtResource("1_2rx51")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[node name="Explosion" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+texture = ExtResource("2_e3cmu")
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_67ubc")
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_67ubc")
+volume_db = -8.0
+
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

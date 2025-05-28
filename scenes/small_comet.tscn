@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7xxpdjqrrx1o"]
+
+[ext_resource type="PackedScene" uid="uid://bvstbv1lkmky5" path="res://scenes/comet.tscn" id="1_1fldd"]
+[ext_resource type="Texture2D" uid="uid://cr1e3cag7nspn" path="res://graphics/comet_small.png" id="1_kv0c4"]
+[ext_resource type="Script" uid="uid://dkgfouw0tdijn" path="res://scenes/small_comet.gd" id="2_qkev1"]
+
+[node name="SmallComet" instance=ExtResource("1_1fldd")]
+script = ExtResource("2_qkev1")
+
+[node name="CollisionPolygon2D" parent="." index="0"]
+polygon = PackedVector2Array(-3, -7, -3, -6, -4, -6, -4, -5, -5, -5, -5, -4, -6, -4, -6, -3, -7, -3, -7, 1, -6, 1, -6, 3, -5, 3, -5, 4, -4, 4, -4, 5, -3, 5, -3, 6, -1, 6, -1, 7, 1, 7, 1, 6, 2, 6, 2, 5, 3, 5, 3, 4, 4, 4, 4, 3, 5, 3, 5, 2, 6, 2, 6, -1, 7, -1, 7, -5, 6, -5, 6, -6, 5, -6, 5, -7)
+
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("1_kv0c4")
