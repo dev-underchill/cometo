@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://cb4vaajcnnktc"]
+
+[ext_resource type="FontFile" uid="uid://4qff4droasqq" path="res://assets/fonts/upheavtt.ttf" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://br7wev2h145gw" path="res://graphics/main_menu_background_2.png" id="2_bqqt6"]
+[ext_resource type="Script" uid="uid://c3j7c4hy4b43y" path="res://scenes/button.gd" id="2_ekxnf"]
+
+[sub_resource type="Theme" id="Theme_ekxnf"]
+default_font = ExtResource("1_l6cm7")
+
+[sub_resource type="Theme" id="Theme_bqqt6"]
+default_font_size = 42
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu84c"]
+bg_color = Color(0.313726, 0.313726, 0.313726, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6cm7"]
+bg_color = Color(0.564706, 0.564706, 0.564706, 0.407843)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ekxnf")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -192.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+texture = ExtResource("2_bqqt6")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.0
+offset_top = 97.0
+offset_right = 146.0
+offset_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bqqt6")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_wu84c")
+theme_override_styles/hover = SubResource("StyleBoxFlat_l6cm7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wu84c")
+text = "Start Game"
+script = ExtResource("2_ekxnf")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
